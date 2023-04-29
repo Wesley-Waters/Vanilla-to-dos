@@ -9,10 +9,13 @@ const PORT = 3000;
 // handle parsing body request
 app.use(express.json());
 app.use(express.urlencoded());
-
+// Route handler for database requests
+const dbRouter = require('./routes/dbRequests')
 // Server html file and css file when page loads
 app.use(express.static(path.join(__dirname, '../client')))
 
+// User database route handler when requested
+app.use('/database', dbRouter);
 
 // Catch all error handler
 app.use((req, res) => {
