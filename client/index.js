@@ -1,5 +1,5 @@
 // Functionality for home page
-
+const fetch = require('node-fetch');
 // Adds a new toDo when button is clicked
 const addToDo = () => {
   const searchBar = document.getElementById('new_toDo')
@@ -7,6 +7,13 @@ const addToDo = () => {
   const toDotext = searchBar.value;
   // If user didn't type anything in, return
   if (toDotext === '') return;
+  // Make a post request to server with the new todo
+  fetch(`/database?${toDotext}`, {
+    method: 'POST'
+  })
+  .catch(err => {
+    console.log(err);
+  })
   // Create a new div for the new todo
   const todo = document.createElement('div');
   todo.setAttribute('class', 'toDo')
